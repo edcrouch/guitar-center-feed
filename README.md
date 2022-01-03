@@ -3,11 +3,39 @@
 Super simple script that searches Guitar Center's used gear section for items you're looking for.
 
 ## Installing and Running
-
 1. Install dependencies with your preferred package manager
 2. Copy `config/example-config.mjs` to a new `config/config.mjs`
 3. Modify contents with your preferred search terms and email address
-4. Run with `node index.mjs`
+4. Set up environment variables (see below)
+5. Run with `node index.mjs`
+
+## Environment variables
+You can either use your actual environment or you can set up a .env file in the project root.
+```
+SMTP_ADDRESS=<Address of SMTP server>
+SMTP_FROM_NAME=<Display name for outgoing mail>
+SMTP_FROM_ADDRESS=<Address for outgoing mail>
+SMTP_USERNAME=<Username for SMTP server>
+SMTP_PASSWORD=<Password for SMTP server>
+SMTP_PORT_TLS=<SMTP port for TLS connections>
+SMTP_PORT_SSL=<SMTP port for SSL connections>
+```
+
+## Outgoing Email for Gmail users
+If you use Gmail, you can email yourself through Google's SMTP server for free. This link describes the process: https://kinsta.com/blog/gmail-smtp-server/
+
+**Pay attention to the FAQ question regarding 2FA**
+
+For example, mine is set up with:
+```
+SMTP_ADDRESS='smtp.gmail.com'
+SMTP_FROM_NAME='Edward Crouch'
+SMTP_FROM_ADDRESS=<My gmail address>
+SMTP_USERNAME=<My gmail address>
+SMTP_PASSWORD=<My gmail password>
+SMTP_PORT_TLS='587'
+SMTP_PORT_SSL='465'
+```
 
 ## TODO
 - [ ] Abstract out query selector logic
