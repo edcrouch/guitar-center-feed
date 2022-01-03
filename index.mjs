@@ -5,34 +5,36 @@ import { makeHTML } from "./src/util/html.mjs"
 import { mailFactory } from "./src/util/factories.mjs";
 import configs from "./config/config.mjs"
 
-const mailer = mailFactory()
-let history
+export default async function main() {
+  const mailer = mailFactory()
+  let history
 
-try {
-  history = JSON.parse(await fs.readFile('history.json'))
-} catch (e) {
-  history = []
-}
-
-const results = await Promise.all(configs.searches.map(getResults))
-
-const combined = results.reduce((p, c) => {
-  return {
-    matches: p.matches.concat(c.matches),
-    itemIds: p.itemIds.concat(c.itemIds)
+  try {
+    history = JSON.parse(await fs.readFile('history.json'))
+  } catch (e) {
+    history = []
   }
-})
 
-const newMatches = combined.matches.filter(item => !history.map(record => record.itemId).includes(item.itemId))
-const newHistory = newMatches.concat(history.filter(record => combined.itemIds.includes(record.itemId)))
+  const results = await Promise.all(configs.searches.map(getResults))
 
-await fs.writeFile('history.json', JSON.stringify(newHistory, null, '  '))
+  const combined = results.reduce((p, c) => {
+    return {
+      matches: p.matches.concat(c.matches),
+      itemIds: p.itemIds.concat(c.itemIds)
+    }
+  })
 
-if (newMatches.length) {
-  const html = makeHTML(newMatches)
-  sendMail(html)
-} else {
-  console.log('no new matches')
+  const newMatches = combined.matches.filter(item => !history.map(record => record.itemId).includes(item.itemId))
+  const newHistory = newMatches.concat(history.filter(record => combined.itemIds.includes(record.itemId)))
+
+  await fs.writeFile('history.json', JSON.stringify(newHistory, null, '  '))
+
+  if (newMatches.length) {
+    const html = makeHTML(newMatches)
+    sendMail(html)
+  } else {
+    console.log('no new matches')
+  }
 }
 
 function sendMail(html) {
