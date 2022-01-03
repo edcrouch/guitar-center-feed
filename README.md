@@ -7,7 +7,7 @@ Super simple script that searches Guitar Center's used gear section for items yo
 2. Copy `config/example-config.mjs` to a new `config/config.mjs`
 3. Modify contents with your preferred search terms and email address
 4. Set up environment variables (see below)
-5. Run with `npm run start`
+5. Run with `yarn start` or `npm start`
 6. (Optionally) set up periodic execution with cronjob or equivalent
 
 ## Environment variables
@@ -43,3 +43,4 @@ SMTP_PORT_SSL='465'
 - [ ] Add rest of gear sections to `config/categories.mjs`
 - [ ] Add more notification types?
 - [ ] Lots of optimization
+- [ ] Improve search match logic
