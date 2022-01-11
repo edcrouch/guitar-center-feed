@@ -21,7 +21,7 @@ async function doResults(url, terms) {
       imageLink: el.querySelector('img[data-original]').attributes.getNamedItem('data-original').value,
       title: link.innerHTML,
       productLink: baseURL + link.href,
-      price: el.querySelector('span.productPrice').innerHTML.match(/\d*\.\d{2}$/)[0],
+      price: el.querySelector('span.productPrice').innerHTML.match(/[\d,]*\.\d{2}$/)[0].replace(',', ''),
       condition: el.querySelector('div.productCondition').innerHTML,
       itemId: el.querySelector('var.productId').innerHTML
     }

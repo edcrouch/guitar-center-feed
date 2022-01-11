@@ -24,7 +24,7 @@ export default async function main() {
     }
   })
 
-  const newMatches = combined.matches.filter(item => !history.map(record => record.itemId).includes(item.itemId))
+  const newMatches = combined.matches.filter(item => !history.map(record => record.itemId).includes(item.itemId)).sort((a, b) => a.price - b.price)
   const newHistory = newMatches.concat(history.filter(record => combined.itemIds.includes(record.itemId)))
 
   await fs.writeFile('history.json', JSON.stringify(newHistory, null, '  '))
