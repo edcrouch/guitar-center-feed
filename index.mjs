@@ -37,6 +37,6 @@ export default async function main() {
   }
 }
 
-function sendMail(html) {
+function sendMail(mailer, html) {
   mailer.sendMail(configs.emailRecipients, 'New Guitar Center results', null, html)
 }
