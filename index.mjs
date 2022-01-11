@@ -2,11 +2,12 @@ import fs from "fs/promises"
 
 import { getResults } from "./src/crawler/retrieve.mjs";
 import { makeHTML } from "./src/util/html.mjs"
-import { mailFactory } from "./src/util/factories.mjs";
+import { mailFactory, currencyFactory } from "./src/util/factories.mjs";
 import configs from "./config/config.mjs"
 
 export default async function main() {
   const mailer = mailFactory()
+  const formatter = currencyFactory()
   let history
 
   try {
@@ -30,8 +31,8 @@ export default async function main() {
   await fs.writeFile('history.json', JSON.stringify(newHistory, null, '  '))
 
   if (newMatches.length) {
-    const html = makeHTML(newMatches)
-    sendMail(html)
+    const html = makeHTML(newMatches, formatter)
+    sendMail(mailer, html)
   } else {
     console.log('no new matches')
   }
