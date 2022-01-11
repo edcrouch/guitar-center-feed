@@ -44,3 +44,4 @@ SMTP_PORT_SSL='465'
 - [ ] Add more notification types?
 - [ ] Lots of optimization
 - [ ] Improve search match logic
+- [ ] Filtering based on price
