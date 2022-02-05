@@ -6,7 +6,7 @@ const baseURL = 'https://www.guitarcenter.com'
 const allowedChars = /[^a-z0-9+]/gi
 
 export async function getResults(config) {
-  return doResultsLoop(`${baseURL}${config.category}`, config.searchTerms)
+  return doResults(`${baseURL}${config.category}`, config.searchTerms)
 }
 
 async function doResults(url, terms) {
