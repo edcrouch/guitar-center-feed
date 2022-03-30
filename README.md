@@ -37,6 +37,10 @@ SMTP_PASSWORD=<My gmail password>
 SMTP_PORT_TLS='587'
 SMTP_PORT_SSL='465'
 ```
+## Adding Categories
+If you don't see the category you're interested in in the categories file (`config/categories.mjs`), feel free to add new ones. Just copy the endpoint for the section from the Guitar Center website and add it to the file like the rest of them. Try to make the category as specific as possible for your given search terms because the broader the category, the longer the runtime.
+
+Feel free to make a pull request with new categories you've added.
 
 ## TODO
 - [ ] Abstract out query selector logic
