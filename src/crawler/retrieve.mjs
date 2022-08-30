@@ -33,7 +33,8 @@ async function doResults(url, terms) {
         productLink: baseURL + link.href,
         price: el.querySelector('span.productPrice').innerHTML.match(/[\d,]*\.\d{2}$/)[0].replace(',', ''),
         condition: el.querySelector('div.productCondition').innerHTML,
-        itemId: el.querySelector('var.productId').innerHTML
+        itemId: el.querySelector('var.productId').innerHTML,
+	      datetime: Math.floor(Date.now() / 1000),
       }
     }))
 
