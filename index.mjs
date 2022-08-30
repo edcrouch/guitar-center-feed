@@ -26,15 +26,18 @@ export default async function main() {
   })
 
   const newMatches = combined.matches.filter(item => !history.map(record => record.itemId).includes(item.itemId)).sort((a, b) => a.price - b.price)
-  const newHistory = newMatches.concat(history.filter(record => combined.itemIds.includes(record.itemId)))
+// TODO: why is the not always returning stuff correctly?
+//  const newHistory = newMatches.concat(history.filter(record => combined.itemIds.includes(record.itemId)))
+  const newHistory = newMatches.concat(history)
 
   await fs.writeFile('history.json', JSON.stringify(newHistory, null, '  '))
 
   if (newMatches.length) {
     const html = makeHTML(newMatches, formatter)
     sendMail(mailer, html)
+    console.log(new Date().toLocaleString() + ' - ' + newMatches.length + ' new matches')
   } else {
-    console.log('no new matches')
+    console.log(new Date().toLocaleString() + ' - no new matches')
   }
 }
 
